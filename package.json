@@ -1,13 +1,21 @@
 {
-    "name": "theme",
-    "private": true,
-    "version": "0.0.0",
-    "type": "module",
+    "name": "@neuralfog/theme-provider",
+    "version": "0.1.0",
+    "license": "MIT",
+    "author": "brownhounds",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": ["./dist/**/*"],
+    "exports": {
+        ".": "./dist/index.js"
+    },
     "scripts": {
-        "dev": "vite",
-        "build": "tsc && vite build",
-        "preview": "vite preview",
-        "lint": "tsc --noEmit && biome format && biome lint"
+        "clean": "rm -rf ./dist",
+        "emit-declarations": "tsc --emitDeclarationOnly --declaration --outDir ./dist",
+        "build-lib": "vite build",
+        "build": "npm run clean && npm run build-lib && npm run emit-declarations",
+        "lint": "tsc --noEmit && biome format && biome lint",
+        "release": "npm run clean && npm run build && npm publish --access public"
     },
     "devDependencies": {
         "@neuralfog/biome-config": "0.1.2",
